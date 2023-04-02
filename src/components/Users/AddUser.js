@@ -7,6 +7,7 @@ import ErrorModal from '../UI/ErrorModal';
 const AddUser = (props) => {
     const nameInputRef = useRef();
     const ageInputRef = useRef();
+    const clgInputRef = useRef();
 
     const [error, setError] = useState('');
 
@@ -15,6 +16,7 @@ const AddUser = (props) => {
         event.preventDefault();
         const enteredName = nameInputRef.current.value;
         const enteredUserAge = ageInputRef.current.value;
+        const enteredCollegeName = clgInputRef.current.value;
         if(enteredName.trim().length === 0 || enteredUserAge.trim().length === 0) {
             setError({
                 title: 'Invalid input',
@@ -29,9 +31,10 @@ const AddUser = (props) => {
             })
             return;
         }
-        props.onAddUser(enteredName, enteredUserAge)
+        props.onAddUser(enteredName, enteredUserAge, enteredCollegeName)
         nameInputRef.current.value = '';
         ageInputRef.current.value = '';
+        clgInputRef.current.value = '';
     }
 
 
@@ -62,6 +65,12 @@ const AddUser = (props) => {
               type="number"  
               ref={ageInputRef}
              />
+             <label htmlFor="collegename">College Name</label>
+             <input
+               id="collegename"
+               type="text"
+               ref={clgInputRef} 
+             /> 
              <Button type="submit">Add User</Button>
             </form>
         </Card>
